@@ -8,7 +8,7 @@ export class Inventory {
   readonly cartlink: Locator;
   readonly cartbadge: Locator;
   readonly filterlink: Locator;
-  readonly InventoryCount: Locator;
+  readonly InventoryItems: Locator;
   //readonly addtocart: Locator;
   readonly hamburgericon: Locator;
   readonly logoutlink: Locator;
@@ -20,7 +20,7 @@ export class Inventory {
     this.cartlink = page.locator(".shopping_cart_link");
     this.cartbadge = page.locator(".shopping_cart_badge");
     this.filterlink = page.locator("[data-test = 'product-sort-container']");
-    this.InventoryCount = page.locator("[data-test = 'inventory-item']");
+    this.InventoryItems = page.locator("[data-test = 'inventory-item']");
     //this.addtocart = page.getByRole("button", { name: "Add to cart" });
     this.hamburgericon = page.locator(".bm-burger-button");
     this.logoutlink = page.locator("#logout_sidebar_link");
@@ -33,16 +33,16 @@ export class Inventory {
   }
 
   async getProductCount(): Promise<number> {
-    return await this.InventoryCount.count();
+    return await this.InventoryItems.count();
   }
 
   async AddProductToCart(productname: string): Promise<void> {
-    const product = this.InventoryCount.filter({ hasText: productname });
-    product.getByRole("button", { name: "Add to cart" });
+    const product = this.InventoryItems.filter({ hasText: productname });
+    await product.getByRole("button", { name: "Add to cart" }).click();
   }
 
   async RemoveProductFromCart(productname: string): Promise<void> {
-    const product = this.InventoryCount.filter({ hasText: productname });
-    product.getByRole("button", { name: "Remove" });
+    const product = this.InventoryItems.filter({ hasText: productname });
+    await product.getByRole("button", { name: "Remove" }).click();
   }
 }

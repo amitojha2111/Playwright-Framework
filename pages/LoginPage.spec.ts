@@ -15,8 +15,8 @@ export class LoginPage {
     this.usernameinput = page.getByPlaceholder("Username");
     this.passwordinput = page.getByPlaceholder("Password");
     this.loginbutton = page.getByRole("button", { name: "login" });
-    //this.errormessage = page.locator("[data-test = 'error']");
-    this.errormessage = page.getByText("Epic sadface: Username is required");
+    this.errormessage = page.locator("[data-test = 'error']");
+    //this.errormessage = page.getByText("Epic sadface: Username is required");
   }
 
   //methods
