@@ -1,0 +1,48 @@
+import { expect, Locator, test, Page } from "@playwright/test";
+
+InventoryURL: "https://www.saucedemo.com/inventory.html";
+export class Inventory {
+  //Locator
+  readonly page: Page;
+  readonly Pagetitle: Locator;
+  readonly cartlink: Locator;
+  readonly cartbadge: Locator;
+  readonly filterlink: Locator;
+  readonly InventoryCount: Locator;
+  //readonly addtocart: Locator;
+  readonly hamburgericon: Locator;
+  readonly logoutlink: Locator;
+
+  //constructor
+  constructor(page: Page) {
+    this.page = page;
+    this.Pagetitle = page.locator(".title");
+    this.cartlink = page.locator(".shopping_cart_link");
+    this.cartbadge = page.locator(".shopping_cart_badge");
+    this.filterlink = page.locator("[data-test = 'product-sort-container']");
+    this.InventoryCount = page.locator("[data-test = 'inventory-item']");
+    //this.addtocart = page.getByRole("button", { name: "Add to cart" });
+    this.hamburgericon = page.locator(".bm-burger-button");
+    this.logoutlink = page.locator("#logout_sidebar_link");
+  }
+
+  //methods
+  async GetPageTitle(): Promise<void> {
+    await expect(this.page).toHaveURL(/inventory/);
+    await expect(this.Pagetitle).toHaveText("Products");
+  }
+
+  async getProductCount(): Promise<number> {
+    return await this.InventoryCount.count();
+  }
+
+  async AddProductToCart(productname: string): Promise<void> {
+    const product = this.InventoryCount.filter({ hasText: productname });
+    product.getByRole("button", { name: "Add to cart" });
+  }
+
+  async RemoveProductFromCart(productname: string): Promise<void> {
+    const product = this.InventoryCount.filter({ hasText: productname });
+    product.getByRole("button", { name: "Remove" });
+  }
+}
