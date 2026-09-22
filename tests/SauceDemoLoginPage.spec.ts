@@ -1,5 +1,6 @@
 import { expect, test, Locator } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage.spec";
+import { Inventory } from "../pages/Inventory.spec";
 
 test.describe("Sauce Demo login", () => {
   test("Check error message", async ({ page }) => {
@@ -11,11 +12,12 @@ test.describe("Sauce Demo login", () => {
 
   test("Login with valid credentials", async ({ page }) => {
     let loginPageObj = new LoginPage(page);
-
+    let inventoryPage = new Inventory(page);
     await loginPageObj.navigateToLoginPage();
     await loginPageObj.Login("standard_user", "secret_sauce");
-    // await loginPageObj.enterUserName("standard_user");
-    // await loginPageObj.enterPassword("secret_sauce");
-    // await loginPageObj.clickLoginButton();
+    await inventoryPage.GetPageTitle();
+    await inventoryPage.getProductCount();
+    await inventoryPage.AddProductToCart("Sauce Labs Backpack");
+    await inventoryPage.RemoveProductFromCart("Sauce Labs Backpack");
   });
 });
