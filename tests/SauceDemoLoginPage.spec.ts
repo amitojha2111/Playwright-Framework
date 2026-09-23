@@ -22,7 +22,7 @@ test.describe("Sauce Demo login", () => {
     );
   });
 
-  test("Login with valid credentials", async ({ page }) => {
+  test.only("Login with valid credentials", async ({ page }) => {
     let loginPageObj = new LoginPage(page);
     let inventoryPage = new Inventory(page);
     await loginPageObj.navigateToLoginPage();
@@ -31,5 +31,6 @@ test.describe("Sauce Demo login", () => {
     await inventoryPage.getProductCount();
     await inventoryPage.AddProductToCart("Sauce Labs Backpack");
     await inventoryPage.RemoveProductFromCart("Sauce Labs Backpack");
+    await inventoryPage.ApplyFilter("Price (high to low)");
   });
 });

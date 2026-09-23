@@ -45,4 +45,11 @@ export class Inventory {
     const product = this.InventoryItems.filter({ hasText: productname });
     await product.getByRole("button", { name: "Remove" }).click();
   }
+
+  async ApplyFilter(selectfilter: string): Promise<void> {
+    await this.filterlink.selectOption({
+      label: selectfilter,
+    });
+    await expect(this.filterlink).toContainText(selectfilter);
+  }
 }
