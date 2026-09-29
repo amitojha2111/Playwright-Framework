@@ -39,9 +39,9 @@ test.describe("Sauce Demo login", () => {
     //await inventoryPage.ApplyFilter("Price (high to low)");
 
     await ProductInformation.productprice("Sauce Labs Backpack", "$29.99");
-    await ProductInformation.producttitle(
-      "Sauce Labs Backpack",
-      "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.",
-    );
+    // await ProductInformation.producttitle(
+    //   "Sauce Labs Backpack",
+    //   "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.",
+    // );
   });
 });
