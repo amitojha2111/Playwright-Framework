@@ -1,6 +1,10 @@
 import { expect, test, Locator } from "@playwright/test";
 import { LoginPage } from "../pages/LoginPage.spec";
 import { Inventory } from "../pages/Inventory.spec";
+import { ProductDetails } from "../pages/ProductDetails.spec";
+
+//let Productdetailstext =
+//"carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.";
 
 test.describe("Sauce Demo login", () => {
   test("Login without entering details", async ({ page }) => {
@@ -25,12 +29,19 @@ test.describe("Sauce Demo login", () => {
   test.only("Login with valid credentials", async ({ page }) => {
     let loginPageObj = new LoginPage(page);
     let inventoryPage = new Inventory(page);
+    let ProductInformation = new ProductDetails(page);
     await loginPageObj.navigateToLoginPage();
     await loginPageObj.Login("standard_user", "secret_sauce");
     await inventoryPage.GetPageTitle();
-    await inventoryPage.getProductCount();
-    await inventoryPage.AddProductToCart("Sauce Labs Backpack");
-    await inventoryPage.RemoveProductFromCart("Sauce Labs Backpack");
-    await inventoryPage.ApplyFilter("Price (high to low)");
+    //await inventoryPage.getProductCount();
+    //await inventoryPage.AddProductToCart("Sauce Labs Backpack");
+    //await inventoryPage.RemoveProductFromCart("Sauce Labs Backpack");
+    //await inventoryPage.ApplyFilter("Price (high to low)");
+
+    await ProductInformation.productprice("Sauce Labs Backpack", "$29.99");
+    await ProductInformation.producttitle(
+      "Sauce Labs Backpack",
+      "carry.allTheThings() with the sleek, streamlined Sly Pack that melds uncompromising style with unequaled laptop and tablet protection.",
+    );
   });
 });
