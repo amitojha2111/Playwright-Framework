@@ -26,7 +26,7 @@ test.describe("Sauce Demo login", () => {
     );
   });
 
-  test.only("Login with valid credentials", async ({ page }) => {
+  test("Login with valid credentials", async ({ page }) => {
     let loginPageObj = new LoginPage(page);
     let inventoryPage = new Inventory(page);
     let ProductInformation = new ProductDetails(page);
