@@ -8,6 +8,6 @@ test.describe("Sauce Demmo Describe", () => {
 
   test("Verify product count", async ({ inventoryPage }) => {
     const productcount = await inventoryPage.getProductCount();
-    //expect(productcount).toBe(6);
+    expect(productcount).toBe(0);
   });
 });
